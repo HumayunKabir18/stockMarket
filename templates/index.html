@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <style>
+    .bg {
+      color: black;
+      background-color: #a3cfbb;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+  <h1 class="text-center my-3">Stock Market Data Analysis</h1>
+  <h1 class="text-center my-3">List of Data</h1>
+
+
+  <div class="container">
+    <div class="row">
+
+      <!-- options form -->
+      <div style="margin-left: 80%;">
+        <form action="/options/" method="post" id="form">
+          {% csrf_token %}
+          <label for="optionsDropdown">Options:</label>
+          <select id="optionsDropdown" name="option" onchange="submitForm()">
+            <option value="default" selected disabled>Select an option</option>
+            <option value="add">Add new</option>
+            <option value="json">Add JSON file</option>
+            <option value="delete">Delete all</option>
+          </select>
+        </form>
+      </div>
+
+      <!-- data table -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-success table-striped">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Date</th>
+                  <th>Trade_Code</th>
+                  <th>High</th>
+                  <th>Low</th>
+                  <th>Open</th>
+                  <th>Close</th>
+                  <th>Volume</th>
+                  <th style="padding-left: 5%;"> Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {%for x in entity%}
+                <tr>
+                  <td>{{x.id}}</td>
+                  <td>{{x.date}}</td>
+                  <td>{{x.trade_code}}</td>
+                  <td>{{x.high}}</td>
+                  <td>{{x.low}}</td>
+                  <td>{{x.open}}</td>
+                  <td>{{x.close}}</td>
+                  <td>{{x.volume}}</td>
+                  <td><a href="update/{{x.id}}" class="btn btn-success">Update</a>
+                    <a href="delete/{{x.id}}" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 offset-md-4">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            {% if entity.has_previous %}
+            <li class="page-item"><a class="page-link bg" href="/?page=1">&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;</a>
+            </li>
+            <li class="page-item"><a class="page-link bg" href="/?page={{entity.previous_page_number}}">Previous</a>
+            </li>
+
+            {%endif%}
+            <!-- {% for x in page_list %}
+            <li class="page-item"><a class="page-link bg" href="#">{{x}}</a></li>
+            {%endfor%} -->
+            {% if entity.has_next %}
+            <li class="page-item"><a class="page-link bg" href="/?page={{entity.next_page_number}}">&nbsp;&nbsp; Next
+                &nbsp;&nbsp; </a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link bg" href="/?page={{total_pages}}">&nbsp;&nbsp; Last &nbsp;&nbsp;
+              </a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <!-- for option for submition -->
+  <script>
+    function submitForm() {
+      document.getElementById("form").submit();
+    }
+  </script>
+</body>
+
+</html>

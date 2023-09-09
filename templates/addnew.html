@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #e2efea;">
+  {% include "navbar.html" %}
+  <h1 class="text-center my-3">Stock Market Data Analysis</h1>
+  <h1 class="text-center my-3">Add New Data</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card ">
+          <div class="card-body" style="color:black; background-color: #a3cfbb;">
+            <form action="/save/" method="POST">
+              {% csrf_token %}
+              <!-- <div class="mb-3">
+                <label for="date" class="form-label">DATE</label>
+                <input type="date" class="form-control" id="date" name="date">
+              </div> -->
+
+              <div class="mb-3">
+                <label for="trade_code" class="form-label">Trade_Code</label>
+                <input type="text" class="form-control" id="trade_code" name="trade_code" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="volume" class="form-label">Volume</label>
+                <input type="text" class="form-control" id="volume" name="volume" required>
+              </div>
+              <div class="text-center">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="high" class="form-label">High</label>
+                      <input type="text" class="form-control" id="high" name="high" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="low" class="form-label">Low</label>
+                      <input type="text" class="form-control" id="low" name="low" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="open" class="form-label">Open</label>
+                      <input type="text" class="form-control" id="open" name="open" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="close" class="form-label">Close</label>
+                      <input type="text" class="form-control" id="close" name="close" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-dark mt-2">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
