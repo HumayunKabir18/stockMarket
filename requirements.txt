@@ -4,6 +4,7 @@ bcrypt==3.2.0
 blinker==1.4
 Brlapi==0.8.4
 certifi==2023.7.22
+cffi==1.15.1
 chardet==4.0.0
 charset-normalizer==3.2.0
 click==8.0.3
@@ -56,6 +57,7 @@ Pillow==9.2.0
 plotly==5.16.1
 ptyprocess==0.7.0
 pycairo==1.20.1
+pycparser==2.21
 pycups==2.0.1
 PyGObject==3.42.2
 PyJWT==2.4.0
